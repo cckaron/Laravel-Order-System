@@ -41,8 +41,8 @@
                                     <div class="col-sm-6">
                                         <header>商品資訊</header>
                                         @foreach($products as $product)
-                                            <div class="form-group floating-label">
-                                                <input type="text" class="form-control" name="id" value="{{ $product->id }}" readonly/>
+                                            <div class="form-group floating-label" hidden>
+                                                <input type="text" class="form-control" style="color: rgba(118,113,112,0.96)" name="id" value="{{ $product->id }}" readonly/>
                                                 <label for="productName">商品ID (不可更改）</label>
                                             </div>
                                         <div class="form-group floating-label">

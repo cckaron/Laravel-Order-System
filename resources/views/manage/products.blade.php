@@ -67,7 +67,6 @@
                                         <td>
                                             <a href="{{ route('manage.destroyProduct', $product->id) }}" class="btn ink-reaction btn-floating-action btn-danger" onclick="return confirm('確定刪除?')"><i class="md md-delete"></i> </a>
                                             <a href="{{ route('manage.editProduct', $product->id) }}" class="btn ink-reaction btn-floating-action btn-warning"><i class="md md-edit"></i> </a>
-                                            <a href="" class="btn ink-reaction btn-floating-action btn-primary"><i class="md md-print"></i> </a>
                                         </td>
                                     </tr>
                                         @endforeach

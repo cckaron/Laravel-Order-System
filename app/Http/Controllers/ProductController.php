@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -13,16 +12,24 @@ class ProductController extends Controller
     public function getIndex(){
         $products = DB::table('products')->orderBy('sequence', 'asc')->get();
         $columns = Schema::getColumnListing('orders');
-        return view('shop.index', ['products' => $products], ['columns' => $columns]);
+
+        // use "first" method to avoid "get" method's problem
+        $top = DB::table('bulletin')->where('title','=','top_content')->first();
+        $product = DB::table('bulletin')->where('title','=','product_content')->first();
+
+        $top_content = $top->content;
+        $product_content = $product->content;
+
+        return view('shop.index', ['products' => $products, 'columns' => $columns, 'top_content' => $top_content, 'product_content' => $product_content]);
     }
 
     public function postIndex(Request $request){
-//        $this->validate($request, [
-//            '訂購人' => 'required',
-//            '聯絡電話' => 'required',
-//            '取貨地點' => 'required',
-//            '預定日期' => 'required',
-//        ]);
+        $this->validate($request, [
+            '訂購人' => 'required',
+            '聯絡電話' => 'required',
+            '取貨地點' => 'required',
+            '預定日期' => 'required',
+        ]);
 
         $columns = Schema::getColumnListing('orders');
 

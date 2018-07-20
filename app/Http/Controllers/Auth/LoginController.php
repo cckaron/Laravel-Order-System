@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Order;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Schema;
+use Socialite;
+use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -36,4 +41,39 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('google')->stateless()->user();
+        $authUser = $this->findOrCreateUser($user);
+
+
+        return redirect('/admin');
+        //        return redirect($this->redirectTo);
+    }
+
+    public function findOrCreateUser($user)
+    {
+        $authUser = User::where('provider_id', $user->id)->first();
+        if ($authUser){
+            Auth::login($authUser, true);
+            return $authUser;
+        }
+
+        //when you want to add user
+//        return User::create([
+//            'name' => $user->name,
+//            'email' => $user->email,
+//            'provider' => strtoupper('google'),
+//            'provider_id' => $user->id,
+//        ]);
+        return redirect('/login');
+    }
+
+
 }

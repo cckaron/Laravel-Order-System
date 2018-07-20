@@ -26,8 +26,14 @@ Route::get('/ajax/check', [
    'as' => 'ajax.bread',
 ]);
 
+Route::post('ajaxdata/postdata', [
+    'uses' => 'AjaxController@postdata',
+    'as' => 'ajaxdata.postdata'
+]);
 
-Route::group(['prefix' => 'admin'], function(){
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+    Route::auth();
     Route::get('/', [
         'uses' => 'ManageController@getIndex',
         'as' => 'manage.index',
@@ -73,36 +79,62 @@ Route::group(['prefix' => 'admin'], function(){
         'as' => 'manage.destroyProduct',
     ]);
 
+    Route::get('/holiday', [
+        'uses' => 'ManageController@getHoliday',
+        'as' => 'manage.holidays',
+    ]);
+
+    Route::get('/holiday/delete/{id}', [
+        'uses' => 'ManageController@destroyHoliday',
+        'as' => 'manage.destroyHoliday',
+    ]);
+
+    Route::get('/bulletin', [
+        'uses' => 'ManageController@getBulletin',
+        'as' => 'manage.bulletin',
+    ]);
+
+    Route::post('/bulletin', [
+       'uses' => 'ManageController@postBulletin',
+       'as' => 'manage.bulletin',
+    ]);
+
 });
 
 
 Route::group(['prefix' => 'user'], function() {
-    Route::get('/signup',[
-        'uses' => 'UserController@getSignup',
-        'as' => 'user.signup'
-    ]);
-
-    Route::post('/signup',[
-        'uses' => 'UserController@postSignup',
-        'as' => 'user.signup'
-    ]);
-
-    Route::get('/signin',[
-        'uses' => 'UserController@getSignin',
-        'as' => 'user.signin'
-    ]);
-
-    Route::post('/signin',[
-        'uses' => 'UserController@postSignin',
-        'as' => 'user.signin'
-    ]);
-    Route::get('/profile',[
-        'uses' => 'UserController@getProfile',
-        'as' => 'user.profile'
-    ]);
+//    Route::get('/signup',[
+//        'uses' => 'UserController@getSignup',
+//        'as' => 'user.signup'
+//    ]);
+//
+//    Route::post('/signup',[
+//        'uses' => 'UserController@postSignup',
+//        'as' => 'user.signup'
+//    ]);
+//
+//    Route::get('/signin',[
+//        'uses' => 'UserController@getSignin',
+//        'as' => 'user.signin'
+//    ]);
+//
+//    Route::post('/signin',[
+//        'uses' => 'UserController@postSignin',
+//        'as' => 'user.signin'
+//    ]);
+//    Route::get('/profile',[
+//        'uses' => 'UserController@getProfile',
+//        'as' => 'user.profile'
+//    ]);
 
     Route::get('/logout', [
         'uses' => 'UserController@getLogout',
         'as' => 'user.logout'
     ]);
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');

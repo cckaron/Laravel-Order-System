@@ -242,4 +242,66 @@ class ManageController extends Controller
 
         return redirect()->back();
     }
+
+    public function getHoliday(){
+        $days = array(
+            0 => '日',
+            1 => '一',
+            2 => '二',
+            3 => '三',
+            4 => '四',
+            5 => '五',
+            6 => '六');
+        $holidays = DB::table('holidays')->orderBy('date', 'asc')->get();
+        $holidayArray = array();
+        foreach ($holidays as $holiday){
+            $temp = date('m-d-Y', strtotime($holiday->date));
+
+            // if month is "07" not "7" or date is "08" not "8", get rid of the "0" in index 0
+            $temp2 = sscanf($temp, '%d-%d-%d');
+
+            $month = $temp2[0];
+            $date = $temp2[1];
+            $year = $temp2[2];
+
+
+            $realDate = $month.'-'.$date.'-'.$year;
+
+            array_push($holidayArray, $realDate);
+        }
+        return view('manage.holidays', ['holidays' => $holidays, 'holidayArray' => $holidayArray ,'days' => $days]);
+    }
+
+    public function destroyHoliday($id){
+        DB::table('holidays')->where('id', '=', $id)->delete();
+        return redirect()->back();
+    }
+
+    public function getBulletin(){
+
+        // use "first" method to avoid "get" method's problem
+        $top = DB::table('bulletin')->where('title','=','top_content')->first();
+        $product = DB::table('bulletin')->where('title','=','product_content')->first();
+
+        $top_content = $top->content;
+        $product_content = $product->content;
+        return view('manage.bulletin', ['top_content' => $top_content, 'product_content' => $product_content]);
+    }
+
+    public function postBulletin(Request $request){
+        $this->validate($request, [
+            'top_content' => 'required',
+            'product_content' => 'required',
+        ]);
+
+        DB::table('bulletin')
+            ->where('title', 'top_content')
+            ->update(['content' => $request->input('top_content')]);
+
+        DB::table('bulletin')
+            ->where('title', 'product_content')
+            ->update(['content' => $request->input('product_content')]);
+
+        return redirect()->back();
+    }
 }

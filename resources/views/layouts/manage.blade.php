@@ -17,6 +17,7 @@
     <link type="text/css" rel="stylesheet" href="{{ URL::to('css/libs/DataTables/extensions/dataTables.tableTools.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ URL::to('css/libs/select2/select2.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ URL::to('css/print.css') }}" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
 
@@ -53,6 +54,10 @@
 <script src="https://cdn.rawgit.com/eligrey/FileSaver.js/5733e40e5af936eb3f48554cf6a8a7075d71d18a/FileSaver.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.2/xlsx.full.min.js"></script>
 
+{{--datepicker--}}
+<script src="https://cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+<script type="text/javascript" src="{{ URL::to('js/bootstrap-datetimepicker.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- END JAVASCRIPT -->
 

@@ -6,7 +6,7 @@
             <ul class="header-nav header-nav-options">
                 <li class="header-nav-brand" >
                     <div class="brand-holder">
-                        <a href="#">
+                        <a href="{{ route('manage.index') }}">
                             {{--<a href="{% url 'home' %}">--}}
                             <span class="text-lg text-light text-danger">曌咖</span><span class="text-lg text-bold text-primary"> 後台管理系統</span>
                         </a>
@@ -25,13 +25,13 @@
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown" aria-expanded="false">
 								<span class="profile-info">
-									<h4 class="text-lg text-bold text-primary">Laravel Management</h4>
+									<h4 class="text-lg text-bold text-primary">控制台 Control Panel</h4>
 								</span>
                     </a>
                     <ul class="dropdown-menu animation-dock">
-                        <li class="dropdown-header">控制台</li>
-                        <li><a href="#">更改密碼</a></li>
-                        <li class="divider"></li>
+                        <li class="dropdown-header">動作</li>
+                        {{--<li><a href="#">更改密碼</a></li>--}}
+                        {{--<li class="divider"></li>--}}
                         <li><a href="{{ route('user.logout') }}"><i class="fa fa-fw fa-power-off text-danger"></i> 登出</a></li>
                     </ul><!--end .dropdown-menu -->
                 </li><!--end .dropdown -->

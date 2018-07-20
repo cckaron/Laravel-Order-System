@@ -86,18 +86,33 @@
                 </li><!--end /menu-li -->
                 <!-- END PRODUCT -->
 
-                <!-- BEGIN PROFILE -->
+                <!-- BEGIN HOLIDAY -->
                 <li class="gui-folder">
                     <a>
                         <div class="gui-icon"><i class="fa fa-user"></i></div>
-                        <span class="title">個人中心</span>
+                        <span class="title">休息日</span>
                     </a>
                     <!--start submenu -->
                     <ul>
                         {{--<li><a href="{% url 'change_password' %}" ><span class="title">Change Password</span></a></li>--}}
                         {{--<li><a href="{% url 'logout' %}" ><span class="title">Logout</span></a></li>--}}
-                        <li><a href="#" ><span class="title">更改密碼</span></a></li>
-                        <li><a href="#" ><span class="title">登出</span></a></li>
+                        <li><a href="{{ route('manage.holidays') }}" ><span class="title">日期管理</span></a></li>
+                    </ul><!--end /submenu -->
+                </li><!--end /menu-li -->
+                <!-- END HOLIDAY -->
+
+                <!-- BEGIN PROFILE -->
+                <li class="gui-folder">
+                    <a>
+                        <div class="gui-icon"><i class="fa fa-user"></i></div>
+                        <span class="title">管理中心</span>
+                    </a>
+                    <!--start submenu -->
+                    <ul>
+                        {{--<li><a href="{% url 'change_password' %}" ><span class="title">Change Password</span></a></li>--}}
+                        {{--<li><a href="{% url 'logout' %}" ><span class="title">Logout</span></a></li>--}}
+                        <li><a href="{{ route('manage.bulletin') }}"><span class="title">公告設定</span></a></li>
+                        <li><a href="{{ route('user.logout') }}" ><span class="title">登出</span></a></li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
                 <!-- END PROFILE -->
@@ -107,7 +122,9 @@
 
             <div class="menubar-foot-panel">
                 <small class="no-linebreak hidden-folded">
-                    <span class="opacity-75">Copyright &copy; {% now "Y" %}</span> <strong>Chun-Kai Kao</strong>
+                    <span class="opacity-75">版權所有 &copy; </span> <strong>Chun-Kai Kao （高俊凱）</strong>
+                    <br>
+                    <span class="opacity-75">聯絡方式： </span> <strong>cg.workst@gmail.com</strong>
                 </small>
             </div>
         </div><!--end .menubar-scroll-panel-->

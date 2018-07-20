@@ -1,28 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">曌咖手作烘焙</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center bg-light">
+    <a href="/" class="navbar-brand d-flex w-50 mr-auto">曌咖手作烘焙</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" style="color: rgba(192,38,19,0.96)">{{ $top_content }}</a>
             </li>
         </ul>
-        <div class="form-inline my-2 my-lg-0">
-            <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user"></i>
-                 會員管理
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ route('user.signin') }}">登入</a>
-                <a class="dropdown-item" href="{{ route('user.signup') }}">註冊</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ route('user.logout') }}">登出</a>
-            </div>
-            </div>
-        </div>
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">聯絡電話：0968779056 何先生</a>
+            </li>
+            {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" href="#">Right</a>--}}
+            {{--</li>--}}
+        </ul>
     </div>
 </nav>
