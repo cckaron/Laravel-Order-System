@@ -27,7 +27,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-head style-primary">
-                            <header>新增商品</header>
+                            <header>新增地點</header>
                             <div class="tools">
                                 <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
                                 <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
@@ -35,40 +35,22 @@
                         </div>
                         <div class="card-body">
 
-                            <form class="form" role="form" action="{{ route('manage.addProduct') }}" method="post">
+                            <form class="form" role="form" action="{{ route('manage.addSpot') }}" method="post">
 
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <header>商品資訊</header>
+                                        <header>詳細資訊</header>
                                         <div class="form-group floating-label">
-                                            <input type="text" class="form-control" name="title"/>
-                                            <label for="productName">品名</label>
-                                        </div>
-                                        <div class="form-group floating-label">
-                                            <input type="text" class="form-control" name="price"/>
-                                            <label for="productPrice">價格 (單位：元)</label>
+                                            <input type="text" class="form-control" name="spot"/>
+                                            <label for="productName">取貨地點</label>
                                         </div>
                                         <div class="form-group floating-label">
-                                            <input type="text" class="form-control" name="unit"/>
-                                            <label for="productUnit">單位 (例如：條)</label>
+                                            <input type="text" class="form-control" name="sequence"/>
+                                            <label for="productPrice">顯示順序 (「 1 」顯示在最前面)</label>
                                         </div>
                                         <div class="form-group floating-label">
-                                            <input type="text" class="form-control" name="description"/>
-                                            <label for="productDescription">描述</label>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="custom-select-sm form-control" name="thickSlice">
-                                                <option>是否可以切厚片？</option>
-                                                <option value="1">可以切厚片</option>
-                                                <option value="0">不可以切厚片</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="custom-select-sm form-control" name="thinSlice">
-                                                <option>是否可以切薄片？</option>
-                                                <option value="1">可以切薄片</option>
-                                                <option value="0">不可以切薄片</option>
-                                            </select>
+                                            <input type="text" class="form-control" name="content"/>
+                                            <label for="productUnit">顯示內容</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

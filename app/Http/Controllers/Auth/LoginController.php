@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -72,7 +72,7 @@ class LoginController extends Controller
 //            'provider' => strtoupper('google'),
 //            'provider_id' => $user->id,
 //        ]);
-        return redirect('/login');
+        return redirect('/admin');
     }
 
 

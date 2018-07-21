@@ -19,7 +19,9 @@
                         <div class="card-body">
 
                             <section style="float:left">
+                                <span style="padding-right: 20px">
                                 <input name="add" id="add_data" type="submit" class="btn btn-success" value="批量新增"/>
+                                </span>
                                 <input type="button" class="btn btn-default" onclick="window.location.reload()" value="重新整理" />
                             </section>
 

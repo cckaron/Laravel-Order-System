@@ -24,7 +24,7 @@
                                 <table id="datatable1" class="table order-column hover">
                                     <thead>
                                     <tr>
-                                        <th width="30px">順序</th>
+                                        <th width="100px">顯示順序 (「 1 」顯示在最前面)</th>
                                         <th width="70px">商品名稱</th>
                                         <th width="100px">商品描述</th>
                                         <th width="50px">價格</th>
@@ -65,7 +65,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('manage.destroyProduct', $product->id) }}" class="btn ink-reaction btn-floating-action btn-danger" onclick="return confirm('確定刪除?')"><i class="md md-delete"></i> </a>
+                                            <a href="{{ route('manage.destroyProduct', $product->id) }}" class="btn ink-reaction btn-floating-action btn-danger" onclick="return confirm('提醒：刪除後所有訂單將一併更改，確定刪除?')"><i class="md md-delete"></i> </a>
                                             <a href="{{ route('manage.editProduct', $product->id) }}" class="btn ink-reaction btn-floating-action btn-warning"><i class="md md-edit"></i> </a>
                                         </td>
                                     </tr>

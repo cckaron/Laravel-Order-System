@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Response;
 class AjaxController extends Controller
 {
     public function getBread(Request $request){
+        $validation = Validator::make($request->all(), [
+            '預訂日期' => 'required|date',
+        ]);
         // value直接得到該值
         $available_Count = DB::table('extras')->where('parameter', 'daily_max')->value('value');
         $available = True;
@@ -35,6 +38,7 @@ class AjaxController extends Controller
         $data = array(
             'canBuy' => $canbuy,
             'available' => $available,
+            'error' => $validation->errors()->all(),
         );
 
         return Response::json($data);
@@ -42,7 +46,7 @@ class AjaxController extends Controller
 
     public function postdata(Request $request){
         $validation = Validator::make($request->all(), [
-            'date' => 'required',
+            'date' => 'required|unique:holidays|date',
         ]);
 
         $error_array = array();

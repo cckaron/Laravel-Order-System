@@ -29,9 +29,9 @@
 								</span>
                     </a>
                     <ul class="dropdown-menu animation-dock">
-                        <li class="dropdown-header">動作</li>
-                        {{--<li><a href="#">更改密碼</a></li>--}}
-                        {{--<li class="divider"></li>--}}
+                        <li class="dropdown-header">前往</li>
+                        <li><a href="{{ route('product.index') }}">訂購主頁面</a></li>
+                        <li class="divider"></li>
                         <li><a href="{{ route('user.logout') }}"><i class="fa fa-fw fa-power-off text-danger"></i> 登出</a></li>
                     </ul><!--end .dropdown-menu -->
                 </li><!--end .dropdown -->

@@ -6,23 +6,10 @@
     <section>
         <div class="section-body">
             <div class="row">
-                @if(count($errors) > 0)
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-head" style="background-color: #ff0e35">
-                                <header>錯誤訊息</header>
-                                <div class="tools">
-                                    <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
-                                    <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
-                                </div>
-                            </div>
-                    <div class="alert alert-danger">
-                        @foreach($errors->all() as $error)
-                            <p>{{ $error }}</p>
-                        @endforeach
-                    </div>
-            @endif
-                    </div></div>
+
+                <!-- INCLUDE MESSAGE -->
+            @include('layouts.returnMessage')
+
                 <!-- BEGIN  - FORM -->
                 <div class="col-lg-12">
                     <div class="card">
@@ -43,12 +30,16 @@
                                         @foreach($products as $product)
                                             <div class="form-group floating-label" hidden>
                                                 <input type="text" class="form-control" style="color: rgba(118,113,112,0.96)" name="id" value="{{ $product->id }}" readonly/>
-                                                <label for="productName">商品ID (不可更改）</label>
+                                                <label for="productName">商品ID (自動生成）</label>
                                             </div>
                                         <div class="form-group floating-label">
                                             <input type="text" class="form-control" name="title" value="{{ $product->title }}"/>
                                             <label for="productName">品名</label>
                                         </div>
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" name="sequence" value="{{ $product->sequence }}"/>
+                                                <label for="productPrice">顯示順序 (「 1 」顯示在最前面)</label>
+                                            </div>
                                         <div class="form-group floating-label">
                                             <input type="text" class="form-control" name="price" value="{{ $product->price }}"/>
                                             <label for="productPrice">價格 (單位：元)</label>
@@ -82,7 +73,7 @@
                                     <div class="col-md-12">
                                         <hr>
                                         <div class="card-actionbar-row">
-                                            <input type="submit" class="btn btn-flat btn-primary ink-reaction" value="確認修改">
+                                            <input type="submit" class="btn btn-flat btn-primary ink-reaction" onclick="return confirm('提醒：如有變更厚度，所有訂單將一併更改，確定變更?')" value="確認修改">
                                         </div>
                                     </div>
                                 </div>

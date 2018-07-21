@@ -20,6 +20,66 @@ class ManageController extends Controller
         return view('manage.admin', ['columns' => $columns], ['orders' => $orders]);
     }
 
+    public function editOrder($id){
+
+        $columns = Schema::getColumnListing('orders');
+
+        $order = DB::table('orders')->where('id','=', $id)->first();
+
+        return view('manage.editOrder', ['order' => $order, 'columns' => $columns]);
+    }
+
+    public function postEditOrder(Request $request){
+        $this->validate($request, [
+            '訂購人' => 'required',
+            '預訂日期' => 'required',
+        ]);
+
+        $columns = Schema::getColumnListing('orders');
+
+        $id = $request->input('id');
+
+        $order = Order::find($id);
+
+
+        $total = 0;
+        $sum = 0;
+
+        for ($i=0; $i<count($columns); $i++){
+            $orderValue = $request->input($columns[$i]);
+            $orderColumn = $columns[$i];
+            $order -> $orderColumn = $orderValue;
+
+            if ($i>6){
+                $total += (int)$orderValue;
+
+                // check if column contains "_"
+                if (strpos($columns[$i], '_') != True)
+                {
+                    $product = DB::table('products')->where('id_notSlice', $orderColumn)->first();
+                    $price = $product->price;
+                }
+                else{
+                    $name = explode("_", $orderColumn)[0];
+                    $product = DB::table('products')->where('id_notSlice', $name)->first();
+                    $price = $product->price;
+                }
+
+                $sum += (int)$orderValue * $price;
+
+            }
+        }
+
+        $all = '總數量';
+        $order -> $all = $total;
+
+        $dollar = '總金額';
+        $order -> $dollar = $sum;
+
+        $order->save();
+
+        return redirect()->back()->with('message', '修改成功！');    }
+
     public function destroyOrder($id){
         DB::table('orders')->where('id','=', $id)->delete();
 
@@ -39,11 +99,11 @@ class ManageController extends Controller
 
     public function postAddProduct(Request $request){
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|unique:products',
             'price' => 'required',
             'unit' => 'required',
-            'thickSlice' => 'required',
-            'thinSlice' => 'required',
+            'thickSlice' => 'required|boolean',
+            'thinSlice' => 'required|boolean',
         ]);
 
         $id_thickSlice = '';
@@ -101,8 +161,7 @@ class ManageController extends Controller
             });
         }
 
-
-        return redirect()->back();
+        return redirect()->back()->with('message', '新增商品成功！');
     }
 
     public function editProduct($id){
@@ -113,19 +172,22 @@ class ManageController extends Controller
     }
 
     public function postEditProduct(Request $request){
+
+        //title needs to be unique, except of itself
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|unique:products,title,'.$request->input('id'),
             'price' => 'required',
             'unit' => 'required',
-            'thickSlice' => 'required',
-            'thinSlice' => 'required',
+            'sequence' => 'required',
+            'thickSlice' => 'required|boolean',
+            'thinSlice' => 'required|boolean',
         ]);
 
         $id = $request->input('id');
 
         $product = Product::findOrFail($id);
 
-
+        $product->title = $request->input('title');
         $product->price = $request->input('price');
         $product->unit = $request->input('unit');
         $product->description = $request->input('description');
@@ -192,7 +254,7 @@ class ManageController extends Controller
 
 
 
-        return redirect()->back();
+        return redirect()->back()->with('message', '修改成功！');
     }
 
     public function destroyProduct($id){
@@ -231,7 +293,7 @@ class ManageController extends Controller
 
         foreach ($orders as $order){
             $total = 0;
-            for ($i=5; $i<count($columns); $i++){
+            for ($i=6; $i<count($columns); $i++){
                 $column = $columns[$i];
                 $orderValue = $order->$column;
                 $total += (int)$orderValue;
@@ -290,8 +352,6 @@ class ManageController extends Controller
 
     public function postBulletin(Request $request){
         $this->validate($request, [
-            'top_content' => 'required',
-            'product_content' => 'required',
         ]);
 
         DB::table('bulletin')
@@ -301,6 +361,67 @@ class ManageController extends Controller
         DB::table('bulletin')
             ->where('title', 'product_content')
             ->update(['content' => $request->input('product_content')]);
+
+        return redirect()->back()->with('message', '修改成功！');
+    }
+
+    public function getSpot(){
+        $spots = DB::table('spots')->orderBy('sequence', 'asc')->get();
+
+        return view('manage.spots', ['spots' => $spots]);
+    }
+
+    public function addSpot(){
+
+        return view('manage.addSpot');
+    }
+
+    public function postAddSpot(Request $request){
+        $this->validate($request, [
+            'spot' => 'required|unique:spots',
+            'sequence' => 'required',
+            'content' => 'required',
+        ]);
+
+        DB::table('spots')->insert([
+                'spot' => $request->input('spot'),
+                'sequence' => $request->input('sequence'),
+                'content' => $request->input('content')
+            ]);
+
+        return redirect()->back()->with('message', '新增地點成功！');
+    }
+
+    public function editSpot($id){
+
+        $spots = DB::table('spots')->where('id','=', $id)->get();
+
+        return view('manage.editSpot', ['spots' => $spots]);
+    }
+
+    public function postEditSpot(Request $request){
+        // spot needs to be unique, except of itself
+        $this->validate($request, [
+            'spot' => 'required|unique:spots,spot,'.$request->input('id'),
+            'sequence' => 'required',
+            'content' => 'required',
+        ]);
+
+        $id = $request->input('id');
+
+        DB::table('spots')
+            ->where('id', $id)
+            ->update([
+                'spot' => $request->input('spot'),
+                'sequence' => $request->input('sequence'),
+                'content' => $request->input('content'),
+            ]);
+
+        return redirect()->back()->with('message', '修改成功！');
+    }
+
+    public function destroySpot($id){
+        DB::table('spots')->where('id','=', $id)->delete();
 
         return redirect()->back();
     }

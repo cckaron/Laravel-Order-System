@@ -118,6 +118,64 @@
 
     </script>
 
+    <script>
+        $('form').submit(function(){
+            var sum = 0;
+            $(".custom-select").each(function(){
+                sum += parseInt(this.value);
+            });
+
+            if (sum == 0)
+            {
+                alert("訂購數量不可為零！");
+                return false;
+            }
+            else if (sum > $('#dis_TextInput').val() && $('#dis_TextInput').val()!=0 ){
+                alert('超過當日可訂購量！'+ $('#datepicker').val()+'剩餘'+$('#dis_TextInput').val()+'個麵包可供訂購');
+                return  false;
+            }
+            else if ($('#dis_TextInput').val() == 0)
+            {
+                alert('請選擇預訂日期');
+                return false;
+            }
+
+        })
+    </script>
+
+    <script>
+        $(".custom-select").change(function(){
+            var sum = 0;
+            $(".custom-select").each(function(){
+                sum += parseInt(this.value);
+            });
+            $('#total_bread').text(sum);
+        });
+    </script>
+
+    <script>
+        $(".custom-select").change(function(){
+            var total = 0;
+            $(".gradeX").each(function(){
+                var sum = 0;
+                var price = 0;
+                $(this).find('.custom-select').each(function(){
+                    sum += parseInt(this.value);
+                });
+                $(this).find('.product_price').each(function(){
+                    price = parseInt($(this).text());
+                });
+                total += sum*price;
+            });
+            $('#total_dollar').text(total);
+
+            // Give this input field the total dollar value and then pass it to views
+            // Don't need to pass the total bread because it will be calculated in views
+            $('.total_dollar').val(total);
+        });
+    </script>
+
+
     <script type="text/javascript">
 
         $.ajaxSetup({

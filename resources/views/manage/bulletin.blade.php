@@ -6,23 +6,10 @@
     <section>
         <div class="section-body">
             <div class="row">
-                @if(count($errors) > 0)
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-head" style="background-color: #ff0e35">
-                                <header>錯誤訊息</header>
-                                <div class="tools">
-                                    <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
-                                    <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
-                                </div>
-                            </div>
-                            <div class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    <p>{{ $error }}</p>
-                                @endforeach
-                            </div>
-                            @endif
-                        </div></div>
+
+                <!-- INCLUDE MESSAGE -->
+            @include('layouts.returnMessage')
+
                     <!-- BEGIN  - FORM -->
                     <div class="col-lg-12">
                         <div class="card">

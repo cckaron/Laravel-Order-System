@@ -44,6 +44,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         'as' => 'manage.index',
     ]);
 
+    Route::get('/orders/edit/{id}', [
+        'uses' => 'ManageController@editOrder',
+        'as' => 'manage.editOrder',
+    ]);
+
+    Route::post('/orders/edit', [
+        'uses' => 'ManageController@postEditOrder',
+        'as' => 'manage.postEditOrder',
+    ]);
+
     Route::get('/orders/delete/{id}', [
         'uses' => 'ManageController@destroyOrder',
         'as' => 'manage.destroyOrder',
@@ -97,6 +107,36 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::post('/bulletin', [
        'uses' => 'ManageController@postBulletin',
        'as' => 'manage.bulletin',
+    ]);
+
+    Route::get('/spot', [
+        'uses' => 'ManageController@getSpot',
+        'as' => 'manage.spots',
+    ]);
+
+    Route::get('/spot/new', [
+        'uses' => 'ManageController@addSpot',
+        'as' => 'manage.addSpot',
+    ]);
+
+    Route::post('/spot/new', [
+        'uses' => 'ManageController@postAddSpot',
+        'as' => 'manage.addSpot',
+    ]);
+
+    Route::get('/spot/edit/{id}', [
+        'uses' => 'ManageController@editSpot',
+        'as' => 'manage.editSpot',
+    ]);
+
+    Route::post('/spot/edit', [
+        'uses' => 'ManageController@postEditSpot',
+        'as' => 'manage.postEditSpot',
+    ]);
+
+    Route::get('/spot/delete/{id}', [
+        'uses' => 'ManageController@destroySpot',
+        'as' => 'manage.destroySpot',
     ]);
 
 });

@@ -19,24 +19,25 @@
     <div style="padding-top:20px">
         <h2 class="text-primary">取貨地點</h2>
         <div class="radio">
-            <label>
-                <input type="radio" id="cSpot" name="{{ $columns[4] }}" value="自取" checked/>
-                自取(當日17:00~21:00)
+
+            @foreach($spots->chunk(1) as $spotChunk)
+
+                @foreach($spotChunk as $spot)
+
+            <label style="padding-right:10px">
+                <input type="radio" id="cSpot" name="{{ $columns[4] }}" value="{{ $spot->spot }}"
+                  @if($spot->sequence == 1) checked @endif/>
+                {{ $spot->content }}
             </label>
-            <label>
-                <input type="radio" id="cSpot" name="{{ $columns[4] }}" value="慈科大"/>
-                慈科大(週二．五)
-            </label>
-            <label>
-                <input type="radio" id="cSpot" name="{{ $columns[4] }}" value="榮服處"/>
-                榮服處(週一．四)
-            </label>
+
+                @endforeach
+                @endforeach
         </div>
         <br>
     </div>
     <!-- 日期 -->
     <div class ="form-group" style="padding-top:20px">
-        <h2 class="text-primary">取貨日期</h2>
+        <h2 class="text-primary">預訂日期</h2>
         {{--
         <h6 class="text-success">註 : 每日麵包限量為 {{available_Count}} 條！ </h6>
         --}}
@@ -55,7 +56,7 @@
                         <div style="display:inline-block;width:100px;" id="front">
                             <h5 id="front_Datetext" class="text-success">當日尚有 </h5>
                         </div>
-                        <div style="display:inline-block;width:60px;"><input type="disabledTextInput" aling="center" id="dis_TextInput" class="form-control" placeholder="Disabled input"></div>
+                        <div style="display:inline-block;width:60px;"><input type="disabledTextInput" align="center" id="dis_TextInput" class="form-control" placeholder="Disabled input"></div>
                         <div style="display:inline-block;width:200px;" id="behind">
                             <h5 id="beh_DateText" class="text-success"> 個麵包可供訂購! </h5>
                         </div>
@@ -63,8 +64,9 @@
             </div>
         </div>
     </div>
-    <div class="form-group" style="padding-top:50px; padding-bottom:60px">
-        <h2 class="text-primary" style="padding-bottom:30px">訂購產品</h2>
+    <div class="form-group" style="padding-top:50px">
+        <h2 class="text-primary" style="padding-bottom:20px">訂購產品</h2>
+        <h5 style="color: rgba(192,15,0,0.96); padding-bottom:20px">{{ $product_content }}</h5>
         <section>
             <div class="section-body">
                 <!-- BEGIN DATATABLE 2 -->
@@ -87,7 +89,7 @@
                                     @foreach($productChunk as $product)
                                 <tr class="gradeX">
                                     <td>
-                                        <span style="font-weight:bold">{{$product->title}}</span> <br> {{$product->price}}元 / {{$product->unit}}
+                                        <span style="font-weight:bold">{{$product->title}}</span> <br> <span class="product_price">{{$product->price}}</span>元 / {{$product->unit}}
                                     </td>
 
 
@@ -177,6 +179,25 @@
             <!--end .section-body -->
         </section>
     </div>
+    <div class="row-fluid" id="totalBread" style="padding-bottom:30px;">
+        <div class="span-3">
+            <div style="overflow:auto;width:90%;">
+                <div style="width:600px;">
+                        <div style="display:inline-block;width:150px;">
+                            <h5 style="color: rgba(102,192,53,0.96)">總數量： <span id="total_bread">0</span></h5>
+                        </div>
+                        <div style="display:inline-block;width:150px;">
+                            <h5 style="color: rgba(192,128,68,0.96)">小計： <span id="total_dollar">0</span> 元</h5>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{--hidden--}}
+    <input type="text" id="total_bread" name="total_bread" hidden/>
+    <input type="text" class="total_dollar" name="total_dollar" hidden/>
+
     <div style="text-align:left">
         <input type="submit" name="button" id="button" class="btn btn-primary" value="送出訂單">
     </div>

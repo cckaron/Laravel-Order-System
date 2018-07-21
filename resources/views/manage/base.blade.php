@@ -46,7 +46,7 @@
 
                 <!-- BEGIN DASHBOARD -->
                 <li>
-                    <a href="#" class="active">
+                    <a href="{{ route('manage.index') }}" class="active">
                         {{--<a href="{% url 'home' %}" class="active">--}}
                         <div class="gui-icon"><i class="fa fa-home"></i></div>
                         <span class="title">儀表板</span>
@@ -62,8 +62,6 @@
                     </a>
                     <!--start submenu -->
                     <ul>
-                        {{--<li><a href="{% url 'home'%}" ><span class="title">All Orders</span></a></li>--}}
-                        {{--<li><a href="{% url 'new' %}" ><span class="title">Add Order</span></a></li>--}}
                         <li><a href="{{ route('manage.index') }}" ><span class="title">所有訂單</span></a></li>
                         <li><a href="#" ><span class="title">新增訂單</span></a></li>
                     </ul><!--end /submenu -->
@@ -78,13 +76,25 @@
                     </a>
                     <!--start submenu -->
                     <ul>
-                        {{--<li><a href="{% url 'home_product'%}" ><span class="title">All Products</span></a></li>--}}
-                        {{--<li><a href="{% url 'new_product' %}" ><span class="title">Add Product</span></a></li>--}}
                         <li><a href="{{ route('manage.products') }}" ><span class="title">所有商品</span></a></li>
                         <li><a href="{{ route('manage.addProduct') }}" ><span class="title">新增商品</span></a></li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
                 <!-- END PRODUCT -->
+
+                <!-- BEGIN SPOT -->
+                <li class="gui-folder">
+                    <a>
+                        <div class="gui-icon"><i class="fa fa-cubes"></i></div>
+                        <span class="title">取貨地點</span>
+                    </a>
+                    <!--start submenu -->
+                    <ul>
+                        <li><a href="{{ route('manage.spots') }}" ><span class="title">所有地點</span></a></li>
+                        <li><a href="{{ route('manage.addSpot') }}" ><span class="title">新增地點</span></a></li>
+                    </ul><!--end /submenu -->
+                </li><!--end /menu-li -->
+                <!-- END SPOT -->
 
                 <!-- BEGIN HOLIDAY -->
                 <li class="gui-folder">
@@ -94,8 +104,6 @@
                     </a>
                     <!--start submenu -->
                     <ul>
-                        {{--<li><a href="{% url 'change_password' %}" ><span class="title">Change Password</span></a></li>--}}
-                        {{--<li><a href="{% url 'logout' %}" ><span class="title">Logout</span></a></li>--}}
                         <li><a href="{{ route('manage.holidays') }}" ><span class="title">日期管理</span></a></li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
