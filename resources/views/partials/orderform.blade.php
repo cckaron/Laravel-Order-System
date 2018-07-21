@@ -180,7 +180,7 @@
         </section>
     </div>
     <div class="row-fluid" id="totalBread" style="padding-bottom:30px;">
-        <div class="span-3">
+        <div class="span-2" style="padding-bottom: 20px;">
             <div style="overflow:auto;width:90%;">
                 <div style="width:600px;">
                         <div style="display:inline-block;width:150px;">
@@ -191,6 +191,9 @@
                         </div>
                 </div>
             </div>
+        </div>
+        <div id = 'not-success-section' class='alert alert-danger appearDiv'>
+            <h5 id="not-success" style="color: rgba(205,12,0,0.96);"></h5>
         </div>
     </div>
 

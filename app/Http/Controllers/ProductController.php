@@ -62,6 +62,6 @@ class ProductController extends Controller
 
         $order->save();
 
-        return redirect()->route('product.index');
+        return redirect()->back()->with('message', '訂購成功！');
     }
 }

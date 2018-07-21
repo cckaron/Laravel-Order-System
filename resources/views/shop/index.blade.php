@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Laravel Order System
+    曌咖工作坊
 @endsection
 @section('style')
     <style type="text/css">
@@ -16,13 +16,20 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
-            @if(count($errors) > 0)
+
+            @foreach($errors->all() as $error)
                 <div class="alert alert-danger">
-                    @foreach($errors->all() as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
+                    <p>{{ $error }}</p>
                 </div>
-            @endif
+            @endforeach
+
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        <p>{{ session()->get('message') }}</p>
+                    </div>
+
+                @endif
+
             <h3 class="text-center">
                 <ruby>曌 <rt> ㄓㄠˋ </rt></ruby>咖手感烘焙訂購單
             </h3>
@@ -127,16 +134,19 @@
 
             if (sum == 0)
             {
-                alert("訂購數量不可為零！");
+                $('#not-success').text("訂購數量不可為零！");
+                $('#not-success-section').show();
                 return false;
             }
             else if (sum > $('#dis_TextInput').val() && $('#dis_TextInput').val()!=0 ){
-                alert('超過當日可訂購量！'+ $('#datepicker').val()+'剩餘'+$('#dis_TextInput').val()+'個麵包可供訂購');
+                $('#not-success').text('超過當日可訂購量！'+ $('#datepicker').val()+'剩餘'+$('#dis_TextInput').val()+'個麵包可供訂購');
+                $('#not-success-section').show();
                 return  false;
             }
             else if ($('#dis_TextInput').val() == 0)
             {
-                alert('請選擇預訂日期');
+                $('#not-success').text('請選擇預訂日期！');
+                $('#not-success-section').show();
                 return false;
             }
 

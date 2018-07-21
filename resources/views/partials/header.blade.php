@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center bg-light">
-    <a href="/" class="navbar-brand d-flex w-50 mr-auto">曌咖手作烘焙</a>
+    <a href="/" class="navbar-brand d-flex w-50 mr-auto">曌咖工作坊</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
         <span class="navbar-toggler-icon"></span>
     </button>
