@@ -63,7 +63,6 @@
                     <!--start submenu -->
                     <ul>
                         <li><a href="{{ route('manage.index') }}" ><span class="title">所有訂單</span></a></li>
-                        <li><a href="#" ><span class="title">新增訂單</span></a></li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
                 <!-- END ORDER -->

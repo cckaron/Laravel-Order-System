@@ -32,6 +32,7 @@ class ManageController extends Controller
     public function postEditOrder(Request $request){
         $this->validate($request, [
             '訂購人' => 'required',
+            '取貨地點' => 'required',
             '預訂日期' => 'required',
         ]);
 
