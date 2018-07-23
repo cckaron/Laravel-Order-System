@@ -118,7 +118,7 @@
                     <ul>
                         {{--<li><a href="{% url 'change_password' %}" ><span class="title">Change Password</span></a></li>--}}
                         {{--<li><a href="{% url 'logout' %}" ><span class="title">Logout</span></a></li>--}}
-                        <li><a href="{{ route('manage.bulletin') }}"><span class="title">公告設定</span></a></li>
+                        <li><a href="{{ route('manage.bulletin') }}"><span class="title">主頁設定</span></a></li>
                         <li><a href="{{ route('user.logout') }}" ><span class="title">登出</span></a></li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->

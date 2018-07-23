@@ -73,13 +73,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive">
-                            <table class="table table-striped" >
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th style="width: 5%"></th>
-                                    <th style="width: 5%; text-align:center"> 不切片 </th>
-                                    <th style="width: 5% ; text-align:center"> 切厚片 </th>
-                                    <th style="width: 5% ; text-align:center"> 切薄片 </th>
+                                    <th style="width: 1%; text-align:center"></th>
+                                    <th style="width: 1%; text-align:center"> 不切片 </th>
+                                    <th style="width: 1% ; text-align:center"> 切厚片 </th>
+                                    <th style="width: 1% ; text-align:center"> 切薄片 </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -94,7 +94,7 @@
 
 
                                     <td>
-                                        <select class="custom-select form-control" style="width:auto;" id="{{ $product->id_notSlice }}" name="{{ $product->id_notSlice }}">
+                                        <select class="custom-select form-control" style=";" id="{{ $product->id_notSlice }}" name="{{ $product->id_notSlice }}">
                                             <option value="0" selected>請選擇數量...</option>
                                             <option value="1">1條</option>
                                             <option value="2">2條</option>
@@ -113,7 +113,7 @@
 
                                     @if($product->thickSlice)
                                     <td>
-                                        <select class="custom-select col-xs-2 form-control" style="width:auto;" id="{{ $product->id_thickSlice }}t" name="{{ $product->id_thickSlice }}">
+                                        <select class="custom-select col-xs-2 form-control" style=";" id="{{ $product->id_thickSlice }}t" name="{{ $product->id_thickSlice }}">
                                             <option value="0" selected>請選擇數量...</option>
                                             <option value="1">1條</option>
                                             <option value="2">2條</option>
@@ -133,13 +133,13 @@
 
                                     @if(!$product->thickSlice)
                                         <td>
-                                            此口味不提供切厚片
+                                            不提供
                                         </td>
                                     @endif
 
                                     @if($product->thinSlice)
                                         <td>
-                                            <select class="custom-select col-xs-2 form-control" style="width:auto;" id="{{ $product->id_thinSlice }}" name="{{ $product->id_thinSlice }}">
+                                            <select class="custom-select col-xs-2 form-control" style=";" id="{{ $product->id_thinSlice }}" name="{{ $product->id_thinSlice }}">
                                                 <option value="0" selected>請選擇數量...</option>
                                                 <option value="1">1條</option>
                                                 <option value="2">2條</option>
@@ -159,7 +159,7 @@
 
                                     @if(!$product->thinSlice)
                                         <td>
-                                            此口味不提供切薄片
+                                            不提供
                                         </td>
                                     @endif
                                 </tr>

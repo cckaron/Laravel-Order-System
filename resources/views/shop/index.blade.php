@@ -1,12 +1,13 @@
 @extends('layouts.master')
 @section('title')
-    曌咖工作坊
+    曌咖工作坊之訂購單
 @endsection
 @section('style')
     <style type="text/css">
         div.appearDiv{
             display:None
         }
+
     </style>
 @endsection
 @section('content')
@@ -31,7 +32,7 @@
                 @endif
 
             <h3 class="text-center">
-                <ruby>曌 <rt> ㄓㄠˋ </rt></ruby>咖手感烘焙訂購單
+                <ruby>曌 <rt> ㄓㄠˋ </rt></ruby>咖工作坊之訂購單
             </h3>
             <!-- carousel start -->
         @include('partials.carousel')
@@ -96,30 +97,36 @@
         $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
         $( function() {
 
-            var disableddates = ['7-13-2018'];
+            var disableddates = {!! json_encode($holidayArray) !!}
+            var array = ["2018-07-29"]
 
-            function DisableSpecificDates(date){
-            var m = date.getMonth();
-            var d = date.getDate();
-            var y = date.getFullYear();
+            // the method below is to disable the weekenddays automatically
 
-            var currentdate = (m + 1) + '-' + d + '-' + y;
-
-            for (var i = 0; i <disableddates.length; i++){
-            if ($.inArray(currentdate, disableddates) != -1){
-            return [false];
-            }
-            }
-
-            var weekenddate = $.datepicker.noWeekends(date);
-            return weekenddate;
-            }
+            // function DisableSpecificDates(date){
+            // var m = date.getMonth();
+            // var d = date.getDate();
+            // var y = date.getFullYear();
+            //
+            // var currentdate = (m + 1) + '-' + d + '-' + y;
+            //
+            // for (var i = 0; i <disableddates.length; i++){
+            // if ($.inArray(currentdate, disableddates) != -1){
+            // return [false];
+            // }
+            // }
+            //
+            // var weekenddate = $.datepicker.noWeekends(date);
+            // return weekenddate;
+            // }
 
             $( "#datepicker" ).datepicker({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: "yy-mm-dd",
-                beforeShowDay: DisableSpecificDates
+                beforeShowDay: function(date){
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [ disableddates.indexOf(string) == -1]
+                }
             });
         });
 

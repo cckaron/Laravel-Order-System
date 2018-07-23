@@ -14,7 +14,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-head style-primary">
-                                <header>公告管理</header>
+                                <header>主頁管理</header>
                                 <div class="tools">
                                     <a class="btn btn-icon-toggle btn-collapse"><i class="fa fa-angle-down"></i></a>
                                     <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
@@ -26,15 +26,26 @@
 
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            {{--<header>公告</header>--}}
+                                            <header>公告</header>
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" name="top_title" value="{{ $top_title }}" />
+                                                <label for="top_title">首頁上方——公告標題</label>
+                                            </div>
                                                 <div class="form-group floating-label">
                                                     <input type="text" class="form-control" name="top_content" value="{{ $top_content }}" />
-                                                    <label for="productName">首頁上方公告</label>
+                                                    <label for="top_content">首頁上方——公告內容</label>
                                                 </div>
                                                 <div class="form-group floating-label">
                                                     <input type="text" class="form-control" name="product_content" value="{{ $product_content }}"/>
-                                                    <label for="productName">商品上方公告</label>
+                                                    <label for="product_content">商品上方——公告內容</label>
                                                 </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <header>介紹</header>
+                                            <div class="form-group floating-label">
+                                                <input type="text" class="form-control" name="introduction" value="{{ $introduction }}" />
+                                                <label for="introduction">商家介紹</label>
+                                            </div>
                                         </div>
                                         <div class="col-md-12">
                                             <hr>

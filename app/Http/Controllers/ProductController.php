@@ -17,18 +17,50 @@ class ProductController extends Controller
         $spots = DB::table('spots')->orderBy('sequence', 'asc')->get();
 
         // use "first" method to avoid "get" method's problem
-        $top = DB::table('bulletin')->where('title','=','top_content')->first();
+        $topContent = DB::table('bulletin')->where('title','=','top_content')->first();
+        $topTitle = DB::table('bulletin')->where('title','=','top_title')->first();
         $product = DB::table('bulletin')->where('title','=','product_content')->first();
 
-        $top_content = $top->content;
+        $intro = DB::table('bulletin')->where('title','=','introduction')->first();
+
+
+        $top_content = $topContent->content;
+        $top_title = $topTitle->content;
+        $introduction = $intro->content;
         $product_content = $product->content;
+
+        //get holidays
+        $holidays = DB::table('holidays')->orderBy('date', 'asc')->get();
+        $holidayArray = array();
+        foreach ($holidays as $holiday){
+            array_push($holidayArray, $holiday->date);
+        }
+
+//        foreach ($holidays as $holiday){
+//            $temp = date('m-d-Y', strtotime($holiday->date));
+//
+//            // if month is "07" not "7" or date is "08" not "8", get rid of the "0" in index 0
+//            $temp2 = sscanf($temp, '%d-%d-%d');
+//
+//            $month = $temp2[0];
+//            $date = $temp2[1];
+//            $year = $temp2[2];
+//
+//
+//            $realDate = $month.'-'.$date.'-'.$year;
+//
+//            array_push($holidayArray, $realDate);
+//        }
 
         return view('shop.index', [
             'products' => $products,
             'columns' => $columns,
             'spots' => $spots,
             'top_content' => $top_content,
-            'product_content' => $product_content]);
+            'top_title' => $top_title,
+            'product_content' => $product_content,
+            'holidayArray' => $holidayArray,
+            'introduction' => $introduction]);
     }
 
     public function postIndex(Request $request){

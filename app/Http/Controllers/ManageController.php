@@ -318,20 +318,23 @@ class ManageController extends Controller
         $holidays = DB::table('holidays')->orderBy('date', 'asc')->get();
         $holidayArray = array();
         foreach ($holidays as $holiday){
-            $temp = date('m-d-Y', strtotime($holiday->date));
-
-            // if month is "07" not "7" or date is "08" not "8", get rid of the "0" in index 0
-            $temp2 = sscanf($temp, '%d-%d-%d');
-
-            $month = $temp2[0];
-            $date = $temp2[1];
-            $year = $temp2[2];
-
-
-            $realDate = $month.'-'.$date.'-'.$year;
-
-            array_push($holidayArray, $realDate);
+            array_push($holidayArray, $holiday->date);
         }
+//        foreach ($holidays as $holiday){
+//            $temp = date('m-d-Y', strtotime($holiday->date));
+//
+//            // if month is "07" not "7" or date is "08" not "8", get rid of the "0" in index 0
+//            $temp2 = sscanf($temp, '%d-%d-%d');
+//
+//            $month = $temp2[0];
+//            $date = $temp2[1];
+//            $year = $temp2[2];
+//
+//
+//            $realDate = $month.'-'.$date.'-'.$year;
+//
+//            array_push($holidayArray, $realDate);
+//        }
         return view('manage.holidays', ['holidays' => $holidays, 'holidayArray' => $holidayArray ,'days' => $days]);
     }
 
@@ -343,12 +346,20 @@ class ManageController extends Controller
     public function getBulletin(){
 
         // use "first" method to avoid "get" method's problem
-        $top = DB::table('bulletin')->where('title','=','top_content')->first();
+        $topContent = DB::table('bulletin')->where('title','=','top_content')->first();
+        $topTitle = DB::table('bulletin')->where('title','=','top_title')->first();
+        $intro = DB::table('bulletin')->where('title','=','introduction')->first();
         $product = DB::table('bulletin')->where('title','=','product_content')->first();
 
-        $top_content = $top->content;
+        $top_content = $topContent->content;
+        $top_title = $topTitle->content;
+        $introduction = $intro->content;
         $product_content = $product->content;
-        return view('manage.bulletin', ['top_content' => $top_content, 'product_content' => $product_content]);
+        return view('manage.bulletin', [
+            'top_content' => $top_content,
+            'top_title' => $top_title,
+            'introduction' => $introduction,
+            'product_content' => $product_content,]);
     }
 
     public function postBulletin(Request $request){
@@ -358,6 +369,14 @@ class ManageController extends Controller
         DB::table('bulletin')
             ->where('title', 'top_content')
             ->update(['content' => $request->input('top_content')]);
+
+        DB::table('bulletin')
+            ->where('title', 'top_title')
+            ->update(['content' => $request->input('top_title')]);
+
+        DB::table('bulletin')
+            ->where('title', 'introduction')
+            ->update(['content' => $request->input('introduction')]);
 
         DB::table('bulletin')
             ->where('title', 'product_content')

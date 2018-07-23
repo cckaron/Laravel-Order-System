@@ -168,33 +168,36 @@
         $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
         $( function() {
 
-            // var disableddates = ['7-13-2018'];
+            var disableddates = {!! json_encode($holidayArray) !!}
+            var array = ["2018-07-29"]
 
-            var disableddates = {!! json_encode($holidayArray) !!};
+            // the method below is to disable the weekenddays automatically
 
-
-            function DisableSpecificDates(date){
-                var m = date.getMonth();
-                var d = date.getDate();
-                var y = date.getFullYear();
-
-                var currentdate = (m + 1) + '-' + d + '-' + y;
-
-                for (var i = 0; i <disableddates.length; i++){
-                    if ($.inArray(currentdate, disableddates) != -1){
-                        return [false];
-                    }
-                }
-
-                var weekenddate = $.datepicker.noWeekends(date);
-                return weekenddate;
-            }
+            // function DisableSpecificDates(date){
+            // var m = date.getMonth();
+            // var d = date.getDate();
+            // var y = date.getFullYear();
+            //
+            // var currentdate = (m + 1) + '-' + d + '-' + y;
+            //
+            // for (var i = 0; i <disableddates.length; i++){
+            // if ($.inArray(currentdate, disableddates) != -1){
+            // return [false];
+            // }
+            // }
+            //
+            // var weekenddate = $.datepicker.noWeekends(date);
+            // return weekenddate;
+            // }
 
             $( "#datepicker" ).datepicker({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: "yy-mm-dd",
-                beforeShowDay: DisableSpecificDates
+                beforeShowDay: function(date){
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [ disableddates.indexOf(string) == -1]
+                }
             });
         });
 
