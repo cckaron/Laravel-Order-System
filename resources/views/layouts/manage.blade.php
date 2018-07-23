@@ -59,6 +59,10 @@
 <script type="text/javascript" src="{{ URL::to('js/bootstrap-datetimepicker.js') }}"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<!--ADD TinyMCE-->
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=iv5p4gkx86bpmor83tc5b1n9y5jm5els22kv9mduo2tgkn8j"></script>
+<script type="text/javascript" src="{{ URL::to('js/libs/TinyMCE/langs/zh_TW.js') }}"></script>
+
 <!-- END JAVASCRIPT -->
 
 @yield('scripts')

@@ -51,7 +51,7 @@ class ManageController extends Controller
             $orderColumn = $columns[$i];
             $order -> $orderColumn = $orderValue;
 
-            if ($i>6){
+            if ($i>8){
                 $total += (int)$orderValue;
 
                 // check if column contains "_"
@@ -188,15 +188,40 @@ class ManageController extends Controller
 
         $product = Product::findOrFail($id);
 
+        $type = 'Boolean';
+
+
+        // Change the Product name in "Product" and "Order" if product name is changed
+        if ($product->title != $request->input('title')){
+            $title = $request->input('title');
+            $before_title = $product->title;
+            $before_thick_title = $before_title.'_切厚片';
+            $before_thin_title = $before_title.'_切薄片';
+            $thick_title = $title.'_切厚片';
+            $thin_title =$title.'_切薄片';
+            $product->id_notSlice = $title;
+            $product->id_thickSlice = $thick_title;
+            $product->id_thinSlice = $thin_title;
+
+            Schema::table('orders', function (Blueprint $table) use ($type,$before_title, $title){
+                $table->renameColumn($before_title, $title);
+            });
+
+            Schema::table('orders', function (Blueprint $table) use ($type,$before_thick_title, $thick_title){
+                $table->renameColumn($before_thick_title, $thick_title);
+            });
+
+            Schema::table('orders', function (Blueprint $table) use ($type,$before_thin_title, $thin_title){
+                $table->renameColumn($before_thin_title, $thin_title);
+            });
+        }
+
         $product->title = $request->input('title');
         $product->price = $request->input('price');
         $product->unit = $request->input('unit');
         $product->description = $request->input('description');
         $product->thickSlice = $request->input('thickSlice');
         $product->thinSlice = $request->input('thinSlice');
-
-
-        $type = 'Boolean';
 
         $req_thickSlice = $request->input('thickSlice');
         $req_thinSlice = $request->input('thinSlice');
@@ -240,6 +265,7 @@ class ManageController extends Controller
                 });
             }
         }
+
 
 
 
@@ -294,7 +320,7 @@ class ManageController extends Controller
 
         foreach ($orders as $order){
             $total = 0;
-            for ($i=6; $i<count($columns); $i++){
+            for ($i=8; $i<count($columns); $i++){
                 $column = $columns[$i];
                 $orderValue = $order->$column;
                 $total += (int)$orderValue;
@@ -350,20 +376,25 @@ class ManageController extends Controller
         $topTitle = DB::table('bulletin')->where('title','=','top_title')->first();
         $intro = DB::table('bulletin')->where('title','=','introduction')->first();
         $product = DB::table('bulletin')->where('title','=','product_content')->first();
+        $max = DB::table('extras')->where('parameter','=','daily_max')->first();
 
         $top_content = $topContent->content;
         $top_title = $topTitle->content;
         $introduction = $intro->content;
         $product_content = $product->content;
+        $daily_max = $max->value;
+
         return view('manage.bulletin', [
             'top_content' => $top_content,
             'top_title' => $top_title,
             'introduction' => $introduction,
-            'product_content' => $product_content,]);
+            'product_content' => $product_content,
+            'daily_max' => $daily_max]);
     }
 
     public function postBulletin(Request $request){
         $this->validate($request, [
+            'daily_max' => 'required|integer',
         ]);
 
         DB::table('bulletin')

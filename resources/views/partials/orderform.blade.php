@@ -4,7 +4,7 @@
         <h2 class="text-primary" style="padding-bottom:10px">您的大名</h2>
         <div class="form-group row">
             <div class="col-xs-3" style="padding-left:15px">
-                <input type="text" class="form-control" name="{{ $columns[1] }}">
+                <input type="text" class="form-control" name="{{ $columns[3] }}">
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
     <h2 class="text-primary" style="padding-bottom:10px">連絡電話(已加入LINE群組者可免填)</h2>
     <div class="form-group row">
         <div class="col-xs-3" style="padding-left:15px">
-            <input type="text" class="form-control" name="{{ $columns[2] }}">
+            <input type="text" class="form-control" name="{{ $columns[4] }}">
         </div>
     </div>
     <!-- 取貨地點 -->
@@ -25,7 +25,7 @@
                 @foreach($spotChunk as $spot)
 
             <label style="padding-right:10px">
-                <input type="radio" id="cSpot" name="{{ $columns[4] }}" value="{{ $spot->spot }}"
+                <input type="radio" id="cSpot" name="{{ $columns[6] }}" value="{{ $spot->spot }}"
                   @if($spot->sequence == 1) checked @endif/>
                 {{ $spot->content }}
             </label>
@@ -41,11 +41,10 @@
         {{--
         <h6 class="text-success">註 : 每日麵包限量為 {{available_Count}} 條！ </h6>
         --}}
-        <h6 class="text-secondary">週六、日為店休，請勿訂購，謝謝!</h6>
     </div>
     <div class="form-group row">
         <div class="col-xs-3" style="padding-left:10px">
-            <input type="text" class="form-control" placeholder="請選擇日期" id="datepicker" name="{{ $columns[3] }}">
+            <input type="text" class="form-control" placeholder="請選擇日期" id="datepicker" name="{{ $columns[5] }}">
         </div>
     </div>
     <div class="row-fluid appearDiv" id="appearDivControl">

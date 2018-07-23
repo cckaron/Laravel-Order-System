@@ -165,6 +165,10 @@ return [
         ],
         'content' => [
             'required' => '請輸入顯示內容',
+        ],
+        'daily_max' => [
+            'required' => '請輸入限訂數量',
+            'integer' => '限訂數量為正整數！',
         ]
     ],
 

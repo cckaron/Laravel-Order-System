@@ -65,13 +65,16 @@ class LoginController extends Controller
             return $authUser;
         }
 
-        //when you want to add user
-//        return User::create([
-//            'name' => $user->name,
-//            'email' => $user->email,
-//            'provider' => strtoupper('google'),
-//            'provider_id' => $user->id,
-//        ]);
+//        when you want to add user
+        else{
+            $newUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'provider' => strtoupper('google'),
+                'provider_id' => $user->id,
+            ]);
+            Auth::login($newUser, true);
+        }
         return redirect('/admin');
     }
 

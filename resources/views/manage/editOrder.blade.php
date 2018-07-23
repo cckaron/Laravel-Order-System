@@ -32,12 +32,12 @@
                                             <div class="form-group floating-label">
                                                 @php($column = $columns[$k])
                                                 <input type="text" class="form-control" name="{{ $columns[$k] }}" value="{{ $order-> $column }}" readonly/>
-                                                <label for="productName">ID (自動生成)</label>
+                                                <label for="productName">{{ $columns[$k] }}</label>
                                             </div>
                                         @endfor
 
-                                        @for($i=1; $i<count($columns); $i++)
-                                            @if($i != 5 and $i != 6)
+                                        @for($i=3; $i<count($columns); $i++)
+                                            @if($i != 7 and $i != 8)
                                         <div class="form-group floating-label">
                                             @php($column = $columns[$i])
                                             <input type="text" class="form-control" name="{{ $columns[$i] }}" value="{{ $order-> $column }}"/>

@@ -73,7 +73,8 @@
                                     <div class="col-md-12">
                                         <hr>
                                         <div class="card-actionbar-row">
-                                            <input type="submit" class="btn btn-flat btn-primary ink-reaction" onclick="return confirm('提醒：如有變更厚度，所有訂單將一併更改，確定變更?')" value="確認修改">
+                                            <input type="submit" class="btn btn-flat btn-primary ink-reaction" onclick="return confirm('提醒：如有變更厚度，所有訂單將一併更改，確定變更' +
+                                             '?')" value="確認修改">
                                         </div>
                                     </div>
                                 </div>

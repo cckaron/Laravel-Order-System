@@ -26,7 +26,18 @@
                                     <thead>
                                     <tr>
                                         @foreach($columns as $column)
-                                        <th width="20px">{{ $column }}</th>
+                                            @if($column == 'created_at')
+                                                <th width="20px">
+                                                訂單成立時間
+                                                </th>
+                                            @elseif($column == 'updated_at')
+                                                   @continue
+                                                @else
+                                                <th width="20px">
+                                                {{ $column }}
+                                            </th>
+
+                                            @endif
                                         @endforeach
                                         <th width="50px">動作</th>
                                     </tr>
@@ -37,7 +48,11 @@
                                         @foreach($orderChunk as $order)
                                     <tr class="gradeX">
                                         @foreach($columns as $column)
+                                            @if($column !='updated_at')
                                         <td>{{ $order->$column }}</td>
+                                                @else
+                                                    @continue
+                                            @endif
                                         @endforeach
                                         <td>
                                             <a href="{{ route('manage.destroyOrder', $order->id) }}" class="btn ink-reaction btn-floating-action btn-danger" onclick="return confirm('確定刪除?')"><i class="md md-delete"></i> </a>
