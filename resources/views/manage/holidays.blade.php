@@ -171,7 +171,7 @@
             var disableddates = {!! json_encode($holidayArray) !!}
             var array = ["2018-07-29"]
 
-            // the method below is to disable the weekenddays automatically
+            // the method below is to disable the weekendday automatically
 
             // function DisableSpecificDates(date){
             // var m = date.getMonth();
